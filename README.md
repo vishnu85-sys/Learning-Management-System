@@ -1,164 +1,154 @@
-# LMS — Learning Management System
+# 🎓 Learning Management System (LMS)
 
-A production-style, end-to-end Learning Management System built with **Java 17, Spring Boot, REST APIs, Spring Security, JWT, Spring Data JPA, MySQL, HTML, CSS and JavaScript**.
+A full-stack, production-style **Learning Management System** built with **Java 17, Spring Boot, REST APIs, Spring Security, JWT, Spring Data JPA, Hibernate, MySQL, HTML, CSS, and JavaScript**.
 
-## Highlights
+The platform supports multiple user roles, course management, lessons with embedded learning videos, student enrollment, lesson completion, automatic progress tracking, dashboards, API testing, Docker deployment, and integration testing.
 
-- JWT authentication with **Admin / Instructor / Student** roles
+---
+
+## 🚀 Key Features
+
+### 🔐 Authentication & Authorization
+- JWT-based authentication
 - Student registration and login
-- Course catalog with **search by title/category**
-- Course CRUD with instructor ownership checks
-- Lesson management with embedded **YouTube video lessons**
-- Student enrollment and lesson completion
+- Role-based access control
+- **Admin / Instructor / Student** roles
+- Protected REST APIs
+- Instructor ownership checks for course operations
+
+### 📚 Course Management
+- Course catalog
+- Search courses by title/category
+- Course creation
+- Course update
+- Course deletion
+- Course details and lesson listing
+
+### 🎥 Lesson & Video Management
+- Multiple lessons per course
+- Lesson ordering
+- Lesson content
+- Embedded YouTube learning videos
+- Instructor/Admin lesson creation
+- Student lesson completion
+
+### 📈 Progress Tracking
+- Track completed lessons
 - Automatic course progress percentage
-- Dashboard metrics
-- Public health endpoint for monitoring
-- Centralized validation and exception handling
-- Responsive browser UI served directly by Spring Boot
-- Postman collection for API testing
-- H2-backed integration tests so the test suite does not require a live MySQL server
+- Course-level student progress
+- Enrollment-aware progress management
 
-## Architecture
+### 📊 Dashboard
+- Dashboard statistics
+- Current-user profile endpoint
+- Course and enrollment insights
+- Public application health check
 
-```text
-HTML / CSS / JavaScript
-          ↓
-      REST Controllers
-          ↓
-Spring Security + JWT
-          ↓
-       Service Layer
-          ↓
-Spring Data JPA / Hibernate
-          ↓
-        MySQL 8
-```
+### 🛡️ Reliability & Error Handling
+- Bean/API validation
+- Centralized exception handling
+- Clear HTTP error responses
+- Authentication and authorization handling
 
-## Main APIs
+### 🧪 Testing
+- Spring Boot integration tests
+- H2 in-memory database for tests
+- MySQL is not required for the test suite
+- Frontend JavaScript syntax verification
+- PowerShell verification script
 
-| Method | Endpoint | Purpose |
-|---|---|---|
-| POST | `/api/auth/login` | Login and receive JWT |
-| POST | `/api/auth/register` | Register a Student |
-| GET | `/api/health` | Public application health check |
-| GET | `/api/me` | Current authenticated user |
-| GET | `/api/courses?query=java` | Search/list courses |
-| POST | `/api/courses` | Create course (Admin/Instructor) |
-| PUT | `/api/courses/{id}` | Update course |
-| DELETE | `/api/courses/{id}` | Delete course |
-| GET | `/api/courses/{id}/lessons` | List course lessons |
-| POST | `/api/courses/{id}/lessons` | Create lesson |
-| POST | `/api/enrollments/courses/{id}` | Enroll a student |
-| GET | `/api/enrollments/me` | Student enrollments |
-| POST | `/api/progress/lessons/{id}/complete` | Mark lesson complete |
-| GET | `/api/progress/courses/{id}` | View course progress |
-| GET | `/api/dashboard` | Dashboard statistics |
+### 🐳 Deployment Support
+- Dockerfile
+- Docker Compose
+- MySQL container support
+- Environment-variable based configuration
 
-## Seeded Course Collection
+### 🔌 API Testing
+- Postman collection included
+- REST API endpoints organized by module
 
-The application seeds four core learning tracks, each with five lessons and embedded YouTube learning videos:
+---
 
-- **Java Programming Masterclass** — fundamentals, control flow, collections, OOP and exceptions
-- **Python Programming Masterclass** — syntax, functions, collections, files/errors and OOP
-- **MySQL Database Masterclass** — database concepts, CRUD SQL, joins/subqueries, normalization and indexes
-- **Spring Boot Backend Engineering** — Spring Boot fundamentals, REST APIs, JPA/MySQL, validation and Spring Security/JWT
+# 🎯 Learning Tracks
 
-The seed is idempotent: restarting the application updates the demo lesson metadata without creating duplicate seeded courses.
+The LMS comes with four seeded learning tracks.
 
-## Demo Accounts
+## ☕ Java Programming Masterclass
 
-- **Admin:** `admin@lms.local` / `Admin@123`
-- **Instructor:** `instructor@lms.local` / `Instructor@123`
-- **Student:** `student@lms.local` / `Student@123`
+5 lessons covering:
 
-Change demo credentials before production use.
+- Java Fundamentals
+- Control Flow and Arrays
+- Collections and HashMaps
+- Object-Oriented Programming
+- Exceptions and Clean Java Code
 
-## Run Locally
+## 🐍 Python Programming Masterclass
 
-### 1. Create the database
+5 lessons covering:
 
-Run `database/schema.sql` in MySQL Workbench.
+- Python Basics
+- Conditions, Loops and Functions
+- Lists, Tuples, Sets and Dictionaries
+- Files, Modules and Error Handling
+- Object-Oriented Python
 
-### 2. Configure environment variables
+## 🗄️ MySQL Database Masterclass
 
-PowerShell:
+5 lessons covering:
 
-```powershell
-$env:DB_PASSWORD="YOUR_MYSQL_PASSWORD"
-$env:JWT_SECRET="replace-with-a-long-random-secret"
-```
+- Database Fundamentals
+- SELECT, INSERT, UPDATE and DELETE
+- Joins, GROUP BY and Subqueries
+- Normalization and Database Design
+- Indexes and Production SQL
 
-Optional:
+## 🌱 Spring Boot Backend Engineering
 
-```powershell
-$env:DB_URL="jdbc:mysql://127.0.0.1:3306/lms_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true"
-$env:DB_USER="root"
-```
+5 lessons covering:
 
-### 3. Start Spring Boot
+- Spring Boot Fundamentals
+- REST API Development
+- Spring Data JPA and MySQL
+- Validation and Exception Handling
+- Spring Security and JWT
 
-```powershell
-mvn spring-boot:run
-```
+Each course contains structured lessons and embedded educational videos.
 
-### 4. Open the app
+---
 
-`http://localhost:8080`
-
-### 5. Health check
-
-`http://localhost:8080/api/health`
-
-## Docker
-
-Run the complete stack (Spring Boot + MySQL) with:
-
-```powershell
-docker compose up --build
-```
-
-Then open `http://localhost:8080`.
-
-## Run Tests
-
-The test suite uses an in-memory H2 database and does not require MySQL:
-
-```powershell
-mvn test
-```
-
-Or run the full verification script:
-
-```powershell
-.\scripts\verify.ps1
-```
-
-## Project Structure
+# 🏗️ System Architecture
 
 ```text
-src/main/java/com/vishnu/lms
-├── auth
-├── config
-├── controller
-├── course
-├── enrollment
-├── exception
-├── lesson
-├── progress
-├── security
-├── service
-└── user
-
-src/main/resources
-└── static
-    ├── index.html
-    ├── app.js
-    └── styles.css
-
-src/test
-├── java/com/vishnu/lms/LmsApplicationTests.java
-└── resources/application-test.properties
-
-database/schema.sql
-postman/LMS.postman_collection.json
-```
+                    ┌──────────────────────┐
+                    │   HTML / CSS / JS    │
+                    │    Web Frontend      │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │    REST Controllers  │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │ Spring Security +    │
+                    │       JWT            │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │    Service Layer     │
+                    │ Business Logic       │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │ Spring Data JPA /    │
+                    │     Hibernate        │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │       MySQL 8        │
+                    └──────────────────────┘
